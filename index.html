@@ -7,18 +7,20 @@
     <title>To-Do List</title>
     <link rel="stylesheet" href="style.css">
     <script src="script.js" defer></script>
+    <!-- Link the HTML to the the JavaScript file instead of putting it at the end of the body-->
+     <!--defer allows to download the JS without runnin git until fully reading the HTML-->
 </head>
 
 <body>
 
     <main class="todo-container">
         <h1>My To-Do List</h1>
-        <form id="taskForm">
+        <form id="taskForm"> <!-- In this block, the tasks will be added -->
             <input id="taskInput" type="text">
             <button type="submit">Add</button>
         </form>
-        <p id="errorMessage"></p>
-        <ul id="taskList"></ul>
+        <p id="errorMessage"></p> <!-- If input invalid, the client will get this message -->
+        <ul id="taskList"></ul> <!-- JS will add the tasks in this list -->
     </main>
 
 </body>
