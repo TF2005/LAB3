@@ -1,0 +1,185 @@
+:root {
+    --color-background: #ffffff;
+    --color-text: #333333;
+    --color-accent: #B100CD;
+    --color-box: #F1D6F6 ;
+/*  --color-box: #EECCF4 ;*/
+
+    --space-1: 5px;
+    --space-2: 10px;
+    --space-3: 15px;
+    --space-4: 20px;
+    --space-5: 25px;
+    --space-6: 35px;
+    --space-7: 45px;
+}
+
+body {
+    background-color: var(--color-box);
+    font-family: Georgia, Arial; /*if Georgia not found then Arial */
+    text-align: center;
+    margin: 0;
+    padding: var(--space-4);
+    min-height: 100vh;
+    box-sizing: border-box;
+}
+
+.page {
+    background-color: var(--color-background);
+    min-height: 90vh;
+    box-sizing: border-box;
+    border-radius: var(--space-4);
+    padding: var(--space-4);
+    display: flex;
+    flex-direction: column; /*to put the divs under each other*/
+    align-items: center;
+}
+
+
+h1 {
+    color: var(--color-text);
+    font-size: 22px;
+    font-weight: 700;
+    line-height: 1.2;
+    margin: var(--space-6) 0 var(--space-5);
+}
+
+main {
+    width: 100%;
+    max-width: 700px;
+    box-sizing: border-box;
+    border-radius: var(--space-4);
+    background-color: var(--color-box);
+    padding: var(--space-4) 0;
+    min-height: 200px;
+    display: flex;
+    flex-direction: column; /*to put the tasks under each other*/
+    align-items: center;
+}
+
+#taskForm {
+    width: 80%;
+    display: flex;
+    gap: var(--space-2);
+    box-sizing:border-box;
+}
+
+#taskInput {
+    flex: 1;
+    min-width: 0;
+    box-sizing: border-box;
+    padding: var(--space-3);
+    border: 2px solid var(--color-accent);
+    outline: var(--color-accent); /*when selecting the input the border used to get the defaul black color so this way i replaced it with the input outline color*/
+    border-radius: var(--space-2);
+    font-family: Georgia, Arial;
+    font-size: 15px;
+}
+
+#taskForm button {
+    box-sizing: border-box;
+    background-color: var(--color-background);
+    color: var(--color-accent);
+    border: 2px solid var(--color-accent);
+    transition: background-color 200ms, color 200ms, border 200ms; /*hover effect will be smoother */
+    border-radius: var(--space-2);
+    font-size: 15px;
+    padding: var(--space-3);
+    font-weight: 700;
+    font-family: Georgia, Arial;
+    cursor: pointer; /*i learned that it looks better for a clickable button */
+}
+/* How the button looks when the mouse is over it */
+#taskForm button:hover {
+    background-color: var(--color-accent);
+    border-color: var(--color-accent);
+    color: var(--color-background);
+}
+
+#errorMessage {
+    color: var(--color-accent);
+    font-size: 13px;
+    min-height: 18px;
+    margin: var(--space-2) 0;
+}
+/*the whole tasks container */
+#taskList {
+    width: 100%;
+    padding: 0;
+    margin: var(--space-3) 0;
+    list-style: none; /*since i used an ul i wanted to remove the bullet points so when searched found this command */
+}
+
+
+/*each task alone*/
+.task-item {
+    background-color: var(--color-background);
+    border-radius: var(--space-2);
+    padding: var(--space-3);
+    margin-bottom: var(--space-2);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-3); /*ensures a certain spacing between tasks */
+    color: var(--color-text);
+    font-size: 15px;
+}
+
+/*I wanted to create the same effect as the notepad does when completing a task */
+.task-item.completed {
+    text-decoration: line-through; /*once a task is done we strike it through */
+    opacity: 0.6; /*one it's striked-through the color tends usually to get grey */
+}
+
+.delete-button {
+    background-color: var(--color-background);
+    color: var(--color-accent);
+    border: 1px solid var(--color-accent);
+    border-radius: var(--space-2);
+
+    padding: var(--space-2);
+    font-family: Georgia, Arial;
+    cursor: pointer;
+
+    transition: background-color 200ms, color 200ms;
+}
+
+
+.delete-button:hover {
+    background-color: var(--color-accent);
+    color: var(--color-background);
+}
+
+
+/* adjusting sizes and spacing on larger screens */
+@media (min-width: 768px) {
+
+    body {
+        padding: 30px 50px;
+    }
+
+    h1 {
+        font-size: 32px;
+    }
+
+    main {
+        padding: var(--space-5);
+    }
+
+    #taskForm {
+        gap: var(--space-3);
+    }
+
+    #taskInput {
+        font-size: 16px;
+    }
+
+    #taskForm button {
+        padding: var(--space-3) var(--space-5);
+        font-size: 16px;
+    }
+
+    .task-item {
+        font-size: 16px;
+    }
+}
