@@ -2,8 +2,8 @@
     --color-background: #ffffff;
     --color-text: #333333;
     --color-accent: #B100CD;
-    --color-box: #F1D6F6 ;
-/*  --color-box: #EECCF4 ;*/
+    --color-box: #F1D6F6;
+    /*  --color-box: #EECCF4 ;*/
 
     --space-1: 5px;
     --space-2: 10px;
@@ -16,7 +16,8 @@
 
 body {
     background-color: var(--color-box);
-    font-family: Georgia, Arial; /*if Georgia not found then Arial */
+    font-family: Georgia, Arial;
+    /*if Georgia not found then Arial */
     text-align: center;
     margin: 0;
     padding: var(--space-4);
@@ -27,12 +28,16 @@ body {
 .page {
     background-color: var(--color-background);
     min-height: 90vh;
+    /*page fill most of the screen */
     box-sizing: border-box;
     border-radius: var(--space-4);
+    /*rounded corners*/
     padding: var(--space-4);
     display: flex;
-    flex-direction: column; /*to put the divs under each other*/
+    flex-direction: column;
+    /*to put the divs under each other*/
     align-items: center;
+    /*the items will be centered in a horizontal way */
 }
 
 
@@ -45,6 +50,7 @@ h1 {
 }
 
 main {
+    /*contains my to-do list*/
     width: 100%;
     max-width: 700px;
     box-sizing: border-box;
@@ -52,25 +58,31 @@ main {
     background-color: var(--color-box);
     padding: var(--space-4) 0;
     min-height: 200px;
+    /*box will still be visible even with no tasks */
     display: flex;
-    flex-direction: column; /*to put the tasks under each other*/
+    flex-direction: column;
+    /*to put the tasks in the form under each other*/
     align-items: center;
 }
 
 #taskForm {
+    /*add new tasks*/
     width: 80%;
     display: flex;
+    /*the input and button will be on the same line */
     gap: var(--space-2);
-    box-sizing:border-box;
+    box-sizing: border-box;
 }
 
 #taskInput {
     flex: 1;
+    /*input will take all the available space*/
     min-width: 0;
     box-sizing: border-box;
     padding: var(--space-3);
     border: 2px solid var(--color-accent);
-    outline: var(--color-accent); /*when selecting the input the border used to get the defaul black color so this way i replaced it with the input outline color*/
+    outline: var(--color-accent);
+    /*when selecting the input the border used to get the defaul black color so this way i replaced it with the input outline color*/
     border-radius: var(--space-2);
     font-family: Georgia, Arial;
     font-size: 15px;
@@ -81,14 +93,17 @@ main {
     background-color: var(--color-background);
     color: var(--color-accent);
     border: 2px solid var(--color-accent);
-    transition: background-color 200ms, color 200ms, border 200ms; /*hover effect will be smoother */
+    transition: background-color 200ms, color 200ms, border 200ms;
+    /*hover effect will be smoother */
     border-radius: var(--space-2);
     font-size: 15px;
     padding: var(--space-3);
     font-weight: 700;
     font-family: Georgia, Arial;
-    cursor: pointer; /*i learned that it looks better for a clickable button */
+    cursor: pointer;
+    /*i learned that it looks better for a clickable button */
 }
+
 /* How the button looks when the mouse is over it */
 #taskForm button:hover {
     background-color: var(--color-accent);
@@ -102,12 +117,14 @@ main {
     min-height: 18px;
     margin: var(--space-2) 0;
 }
+
 /*the whole tasks container */
 #taskList {
     width: 100%;
     padding: 0;
     margin: var(--space-3) 0;
-    list-style: none; /*since i used an ul i wanted to remove the bullet points so when searched found this command */
+    list-style: none;
+    /* it removes the default list bullets included in a ul*/
 }
 
 
@@ -120,15 +137,18 @@ main {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: var(--space-3); /*ensures a certain spacing between tasks */
+    gap: var(--space-3);
+    /*ensures a certain spacing between tasks */
     color: var(--color-text);
     font-size: 15px;
 }
 
 /*I wanted to create the same effect as the notepad does when completing a task */
 .task-item.completed {
-    text-decoration: line-through; /*once a task is done we strike it through */
-    opacity: 0.6; /*one it's striked-through the color tends usually to get grey */
+    text-decoration: line-through;
+    /*once a task is done we strike it through */
+    opacity: 0.6;
+    /*once it's striked-through the color tends usually to get grey */
 }
 
 .delete-button {
@@ -136,11 +156,9 @@ main {
     color: var(--color-accent);
     border: 1px solid var(--color-accent);
     border-radius: var(--space-2);
-
     padding: var(--space-2);
     font-family: Georgia, Arial;
     cursor: pointer;
-
     transition: background-color 200ms, color 200ms;
 }
 
