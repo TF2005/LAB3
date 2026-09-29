@@ -18,9 +18,12 @@ function taskToListItem(task) {
 
     li.dataset.id = task.id; /*when clicking delete button, JS doesn't know which task the user wants to delete. However, we already gave every task an ID but it only exists inside the JavaScript object. The <li> on the webpage doesn't automatically know about that ID. That's where dataset allows to store this id inside the HTML element.*/
 
-    li.textContent = task.text; /*i write in the li i created the text of the task given in the tasks array by the user*/
+    li.textContent = task.text; /*write in the li created, the text of the task given in the tasks array by the user*/
     /*Until now, we have <li>hello</li> however for this li i want to assign a class name and i want next to each new task added i want a delete button in the same li*/
     li.classList.add("task-item");
+    if (task.completed) {
+        li.classList.add("completed");
+    }
     const button = document.createElement("button");
     button.textContent = "Delete";
     button.classList.add("delete-button");
@@ -31,11 +34,10 @@ function taskToListItem(task) {
 function addTask() { /*analyze the input given from the user */
     const text = taskInput.value;
 
-    if (text === "") {
+    if (text.trim() === "") { /* reject empty or whitespace-only tasks */
         errorMessage.textContent = "Please enter a task.";
         return;
     }
-
     const task = { /* create an object to store the information of one task */
         id: Date.now(), /* give the task a unique ID */
         text: text, /* store the text entered by the user */
@@ -47,9 +49,10 @@ function addTask() { /*analyze the input given from the user */
 
     taskInput.value = ""; /*empties the input box from the task once it's added*/
     errorMessage.textContent = ""; /*removes an old error message after a successful addition*/
+    saveTasks();
 }
 
-taskForm.addEventListener("submit", (event) => { /*creating an event listener that submit the task by either clicking the button which in html has type=submit or by enter which the browser understands that for each ener the user wants to submit its answer by default*/
+taskForm.addEventListener("submit", (event) => { /*submit event works when the Add button is clicked or Enter is pressed only because it's inside a form, if not then Enter would have needed a keypress */
     event.preventDefault(); /*once submitted the page doesn't reload */
     addTask();
 });
@@ -57,6 +60,21 @@ taskForm.addEventListener("submit", (event) => { /*creating an event listener th
 function deleteTask(id) { /*is the ID of the task we want to delete*/
     tasks = tasks.filter(task => task.id !== Number(id)); /*Keep every task whose ID is different from the ID we want to delete*/
     renderTasks(); /*after deleting the task from the array, it displays on the webpage the updated tasks array */
+    saveTasks();  /* Save the updated tasks */
+}
+
+function toggleTask(id) {
+    tasks = tasks.map(task => { /* i will change the completed status of the task */
+        if (task.id === Number(id)) { /* to check if this is the clicked task*/
+            task.completed = !task.completed;
+        }
+
+        return task;
+    });
+
+    renderTasks();
+    saveTasks();
+
 }
 
 taskList.addEventListener("click", (e) => {
@@ -69,4 +87,22 @@ taskList.addEventListener("click", (e) => {
         deleteTask(li.dataset.id); /* Get the task ID as string and send it to deleteTask() */
         return;
     }
+    toggleTask(li.dataset.id); /*mark the task as complete or incomplete */
 });
+
+/*localStorage is a place provided by the browser to save the data if the page is refreshed or closed*/
+function saveTasks() {
+    localStorage.setItem("tasks", JSON.stringify(tasks)); /*converting the array of objects tasks into a string to be stored in localstorage*/
+}
+
+function loadTasks() { /*it loads the saved data once page refreshed */
+    const savedTasks = localStorage.getItem("tasks");
+
+    if (savedTasks) {
+        tasks = JSON.parse(savedTasks);/*does the opposite of stringify so it converts the saved text back into an array of object */
+    }
+
+    renderTasks();
+}
+
+loadTasks(); /*run when the JS file loads*/
