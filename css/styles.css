@@ -82,13 +82,17 @@ main {
     padding: var(--space-3);
     border: 2px solid var(--color-accent);
     outline: var(--color-accent);
-    /*when selecting the input the border used to get the defaul black color so this way i replaced it with the input outline color*/
+    /*when selecting the input the border used to get the default black color so this way i replaced it with the input outline color*/
     border-radius: var(--space-2);
     font-family: Georgia, Arial;
     font-size: 15px;
 }
 
 #taskForm button {
+    width:50px;
+    display:flex;
+    justify-content: center;
+    align-content: center;
     box-sizing: border-box;
     background-color: var(--color-background);
     color: var(--color-accent);
@@ -100,8 +104,7 @@ main {
     padding: var(--space-3);
     font-weight: 700;
     font-family: Georgia, Arial;
-    cursor: pointer;
-    /*i learned that it looks better for a clickable button */
+    cursor: pointer; /*looks better for a clickable button */
 }
 
 /* How the button looks when the mouse is over it */
@@ -112,7 +115,7 @@ main {
 }
 
 #errorMessage {
-    color: var(--color-accent);
+    color: #333333;
     font-size: 13px;
     min-height: 18px;
     margin: var(--space-2) 0;
@@ -120,46 +123,71 @@ main {
 
 /*the whole tasks container */
 #taskList {
-    width: 100%;
-    padding: 0;
+    width: 80%;
+    padding: var(--space-3);
     margin: var(--space-3) 0;
-    list-style: none;
-    /* it removes the default list bullets included in a ul*/
+    list-style: none;/*removes the default list bullets included in a ul*/
+    
 }
 
 
 /*each task alone*/
 .task-item {
     background-color: var(--color-background);
+    border: 2px solid var(--color-accent);
+    outline: var(--color-accent);
     border-radius: var(--space-2);
     padding: var(--space-3);
     margin-bottom: var(--space-2);
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: flex-start;    
     gap: var(--space-3);
     /*ensures a certain spacing between tasks */
     color: var(--color-text);
     font-size: 15px;
 }
 
-/*I wanted to create the same effect as the notepad does when completing a task */
-.task-item.completed {
+.task-item div {
+    flex: 1;
+    text-align: left;
+}
+
+.complete-button {
+    width: 20px;
+    height: 20px;
+
+    border: 2px solid var(--color-accent);
+    border-radius: 50%;
+    background-color: var(--color-background);
+
+    cursor: pointer;
+    flex-shrink: 0;
+}
+
+.task-item.completed div{
     text-decoration: line-through;
     /*once a task is done we strike it through */
-    opacity: 0.6;
+    opacity: 0.5;
     /*once it's striked-through the color tends usually to get grey */
 }
 
+.task-item.completed .complete-button {
+    background-color: var(--color-accent);
+}
+
 .delete-button {
+    margin-left: auto;
     background-color: var(--color-background);
     color: var(--color-accent);
-    border: 1px solid var(--color-accent);
+    border: none;
     border-radius: var(--space-2);
     padding: var(--space-2);
     font-family: Georgia, Arial;
     cursor: pointer;
     transition: background-color 200ms, color 200ms;
+    font-size: 15px;
+    font-weight: 700;
 }
 
 
@@ -182,6 +210,7 @@ main {
 
     main {
         padding: var(--space-5);
+        max-width: 600px;
     }
 
     #taskForm {

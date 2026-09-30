@@ -10,31 +10,41 @@ function renderTasks() { /*Take the information stored in tasks and display it i
     When we render again, we first empty the old HTML and then create the list again using the updated array.*/
     tasks
         .map(taskToListItem)
-        .forEach(li => taskList.append(li)); /*i am appending to the HTML list of tasks the task elemet i created*/
+        .forEach(li => taskList.append(li)); /*appending to the HTML list of tasks the task element i created*/
 }
 
 function taskToListItem(task) {
     const li = document.createElement("li"); /*I created an html element which will be <li></li> in order to put the task in it to be shown on the webpage */
-
     li.dataset.id = task.id; /*when clicking delete button, JS doesn't know which task the user wants to delete. However, we already gave every task an ID but it only exists inside the JavaScript object. The <li> on the webpage doesn't automatically know about that ID. That's where dataset allows to store this id inside the HTML element.*/
+    li.classList.add("task-item"); /*giving the <li> a class name so I can style the task and its delete button together */
+    const completeButton = document.createElement("button"); /* create the circle used to check the task */
+    completeButton.classList.add("complete-button");
+    completeButton.type = "button";
 
-    li.textContent = task.text; /*write in the li created, the text of the task given in the tasks array by the user*/
-    /*Until now, we have <li>hello</li> however for this li i want to assign a class name and i want next to each new task added i want a delete button in the same li*/
-    li.classList.add("task-item");
-    if (task.completed) {
+    const text = document.createElement("div"); /* create the text of the task  and this div is made for the x not to be striked through once a task is completed*/
+    text.textContent = task.text;
+
+    const button = document.createElement("button"); /* create the delete button */
+    button.textContent = "x";
+    button.classList.add("delete-button");
+    button.type = "button";
+
+    /* Add the elements inside the task box */
+    li.append(completeButton);
+    li.append(text);
+    li.append(button);
+
+    if (task.completed) { /* add the completed class if the task is completed */
         li.classList.add("completed");
     }
-    const button = document.createElement("button");
-    button.textContent = "Delete";
-    button.classList.add("delete-button");
-    li.append(button);
+
     return li;
 }
 
 function addTask() { /*analyze the input given from the user */
     const text = taskInput.value;
 
-    if (text.trim() === "") { /* reject empty or whitespace-only tasks */
+    if (text.trim() === "") { /* reject empty or whitespace tasks */
         errorMessage.textContent = "Please enter a task.";
         return;
     }
@@ -87,7 +97,9 @@ taskList.addEventListener("click", (e) => {
         deleteTask(li.dataset.id); /* Get the task ID as string and send it to deleteTask() */
         return;
     }
-    toggleTask(li.dataset.id); /*mark the task as complete or incomplete */
+    if (e.target.closest(".complete-button")) { /*mark the task as complete when clicking on circle only */
+        toggleTask(li.dataset.id);
+    }
 });
 
 /*localStorage is a place provided by the browser to save the data if the page is refreshed or closed*/
