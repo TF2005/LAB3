@@ -29,7 +29,7 @@ function taskToListItem(task) {
     button.classList.add("delete-button");
     button.type = "button";
 
-    /* Add the elements inside the task box */
+    /* add the elements inside the task box */
     li.append(completeButton);
     li.append(text);
     li.append(button);
@@ -55,7 +55,7 @@ function addTask() { /*analyze the input given from the user */
     };
 
     tasks.push(task); /* adding the new task to the tasks array */
-    renderTasks(); /* Display the updated tasks on the webpage */
+    renderTasks(); /* display the updated tasks on the webpage */
 
     taskInput.value = ""; /*empties the input box from the task once it's added*/
     errorMessage.textContent = ""; /*removes an old error message after a successful addition*/
@@ -70,11 +70,11 @@ taskForm.addEventListener("submit", (event) => { /*submit event works when the A
 function deleteTask(id) { /*is the ID of the task we want to delete*/
     tasks = tasks.filter(task => task.id !== Number(id)); /*Keep every task whose ID is different from the ID we want to delete*/
     renderTasks(); /*after deleting the task from the array, it displays on the webpage the updated tasks array */
-    saveTasks();  /* Save the updated tasks */
+    saveTasks();  /* save the updated tasks */
 }
 
 function toggleTask(id) {
-    tasks = tasks.map(task => { /* i will change the completed status of the task */
+    tasks = tasks.map(task => { /* change the completed status of the task */
         if (task.id === Number(id)) { /* to check if this is the clicked task*/
             task.completed = !task.completed;
         }

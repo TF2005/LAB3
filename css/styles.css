@@ -3,7 +3,6 @@
     --color-text: #333333;
     --color-accent: #B100CD;
     --color-box: #F1D6F6;
-    /*  --color-box: #EECCF4 ;*/
 
     --space-1: 5px;
     --space-2: 10px;
@@ -89,8 +88,8 @@ main {
 }
 
 #taskForm button {
-    width:50px;
-    display:flex;
+    width: 50px;
+    display: flex;
     justify-content: center;
     align-content: center;
     box-sizing: border-box;
@@ -104,7 +103,8 @@ main {
     padding: var(--space-3);
     font-weight: 700;
     font-family: Georgia, Arial;
-    cursor: pointer; /*looks better for a clickable button */
+    cursor: pointer;
+    /*looks better for a clickable button */
 }
 
 /* How the button looks when the mouse is over it */
@@ -115,6 +115,7 @@ main {
 }
 
 #errorMessage {
+    padding-right: 60px;
     color: #333333;
     font-size: 13px;
     min-height: 18px;
@@ -126,8 +127,9 @@ main {
     width: 80%;
     padding: var(--space-3);
     margin: var(--space-3) 0;
-    list-style: none;/*removes the default list bullets included in a ul*/
-    
+    list-style: none;
+    /*removes the default list bullets included in a ul*/
+
 }
 
 
@@ -141,7 +143,7 @@ main {
     margin-bottom: var(--space-2);
     display: flex;
     align-items: center;
-    justify-content: flex-start;    
+    justify-content: flex-start;
     gap: var(--space-3);
     /*ensures a certain spacing between tasks */
     color: var(--color-text);
@@ -165,7 +167,7 @@ main {
     flex-shrink: 0;
 }
 
-.task-item.completed div{
+.task-item.completed div {
     text-decoration: line-through;
     /*once a task is done we strike it through */
     opacity: 0.5;
